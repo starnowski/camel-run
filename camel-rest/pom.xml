@@ -43,11 +43,11 @@
             <version>${org.apache.camel.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-servlet</artifactId>
-            <version>${org.apache.camel.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.camel</groupId>-->
+<!--            <artifactId>camel-servlet</artifactId>-->
+<!--            <version>${org.apache.camel.version}</version>-->
+<!--        </dependency>-->
 
         <!-- use for json binding -->
         <dependency>

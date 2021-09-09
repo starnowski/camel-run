@@ -16,7 +16,7 @@ public class RestBlueprintTest extends CamelBlueprintTestSupport {
 
     @Override
     protected String getBlueprintDescriptor() {
-        return "/OSGI-INF/blueprint/camel.xml";
+        return "OSGI-INF/blueprint/camel.xml";
     }
 
     @Test

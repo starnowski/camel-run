@@ -19,22 +19,22 @@
            http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
     <!-- to setup camel servlet with OSGi HttpService -->
-    <reference id="httpService" interface="org.osgi.service.http.HttpService"/>
+<!--    <reference id="httpService" interface="org.osgi.service.http.HttpService"/>-->
 
-    <bean class="org.apache.camel.component.servlet.osgi.OsgiServletRegisterer"
-          init-method="register"
-          destroy-method="unregister">
-        <property name="alias" value="/camel-fun-rest-blueprint/rest"/>
-        <property name="httpService" ref="httpService"/>
-        <property name="servlet" ref="camelServlet"/>
-    </bean>
+<!--    <bean class="org.apache.camel.component.servlet.osgi.OsgiServletRegisterer"-->
+<!--          init-method="register"-->
+<!--          destroy-method="unregister">-->
+<!--        <property name="alias" value="/camel-fun-rest-blueprint/rest"/>-->
+<!--        <property name="httpService" ref="httpService"/>-->
+<!--        <property name="servlet" ref="camelServlet"/>-->
+<!--    </bean>-->
 
-    <bean id="camelServlet" class="org.apache.camel.component.servlet.CamelHttpTransportServlet"/>
+<!--    <bean id="camelServlet" class="org.apache.camel.component.servlet.CamelHttpTransportServlet"/>-->
 
     <!-- a bean for user services -->
     <bean id="userService" class="com.github.starnowski.camel.fun.UserService"/>
 
-    <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+    <camelContext id="com.github.starnowski.camel.fun" xmlns="http://camel.apache.org/schema/blueprint">
 
         <!-- configure rest to use the camel-servlet component, and use json binding mode -->
         <!-- and tell to output json in pretty print mode -->
@@ -43,34 +43,34 @@
              knows the url to the REST services.
              Notice: This is optional, but needed if the RestRegistry should enlist accurate information.
              You can access the RestRegistry from JMX at runtime -->
-        <restConfiguration component="servlet" bindingMode="json" contextPath="/camel-fun-rest-blueprint/rest"
-                           port="8181">
-            <dataFormatProperty key="prettyPrint" value="true"/>
-        </restConfiguration>
+<!--        <restConfiguration component="servlet" bindingMode="json" contextPath="/camel-fun-rest-blueprint/rest"-->
+<!--                           port="8181">-->
+<!--            <dataFormatProperty key="prettyPrint" value="true"/>-->
+<!--        </restConfiguration>-->
 
-        <!-- defines the rest services using the context-path /user -->
-        <rest path="/user" consumes="application/json" produces="application/json">
-            <description>User rest service</description>
+<!--        &lt;!&ndash; defines the rest services using the context-path /user &ndash;&gt;-->
+<!--        <rest path="/user" consumes="application/json" produces="application/json">-->
+<!--            <description>User rest service</description>-->
 
-            <!-- this is a rest GET to view an user by the given id -->
-            <get uri="/{id}" outType="com.github.starnowski.camel.fun.User">
-                <description>Find user by id</description>
-                <to uri="bean:userService?method=getUser(${header.id})"/>
-            </get>
+<!--            &lt;!&ndash; this is a rest GET to view an user by the given id &ndash;&gt;-->
+<!--            <get uri="/{id}" outType="com.github.starnowski.camel.fun.User">-->
+<!--                <description>Find user by id</description>-->
+<!--                <to uri="bean:userService?method=getUser(${header.id})"/>-->
+<!--            </get>-->
 
-            <!-- this is a rest PUT to create/update an user -->
-            <put type="com.github.starnowski.camel.fun.User">
-                <description>Updates or create a user</description>
-                <to uri="bean:userService?method=updateUser"/>
-            </put>
+<!--            &lt;!&ndash; this is a rest PUT to create/update an user &ndash;&gt;-->
+<!--            <put type="com.github.starnowski.camel.fun.User">-->
+<!--                <description>Updates or create a user</description>-->
+<!--                <to uri="bean:userService?method=updateUser"/>-->
+<!--            </put>-->
 
-            <!-- this is a rest GET to find all users -->
-            <get uri="/findAll" outType="com.github.starnowski.camel.fun.User[]">
-                <description>Find all users</description>
-                <to uri="bean:userService?method=listUsers"/>
-            </get>
+<!--            &lt;!&ndash; this is a rest GET to find all users &ndash;&gt;-->
+<!--            <get uri="/findAll" outType="com.github.starnowski.camel.fun.User[]">-->
+<!--                <description>Find all users</description>-->
+<!--                <to uri="bean:userService?method=listUsers"/>-->
+<!--            </get>-->
 
-        </rest>
+<!--        </rest>-->
 
         <route id="invokeService">
             <from uri="direct:getAllUsers"/>
