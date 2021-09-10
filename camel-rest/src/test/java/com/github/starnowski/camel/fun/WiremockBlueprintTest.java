@@ -31,7 +31,7 @@ public class WiremockBlueprintTest extends CamelBlueprintTestSupport {
     }
 
     protected String setConfigAdminInitialConfiguration(final Properties props) {
-        props.setProperty("service.host", "localhost:" + Integer.toString(wireMockRule.getOptions().portNumber()));
+        props.setProperty("service.host", "localhost:" + wireMockRule.getOptions().portNumber());
         // etc...
 
         return "com.github.starnowski.camel.fun.wiremock.stuff";
@@ -41,7 +41,7 @@ public class WiremockBlueprintTest extends CamelBlueprintTestSupport {
     public void exampleTest() {
         // GIVEN
         stubFor(get("/getAllUsers")
-                .withHeader("Content-Type", containing("xml"))
+//                .withHeader("Content-Type", containing("application/xml"))
                 .willReturn(ok()
                         .withHeader("Content-Type", "text/xml")
                         .withBody("<response>SUCCESS</response>")));

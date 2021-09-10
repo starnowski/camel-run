@@ -36,6 +36,9 @@
             <setHeader name="CamelHttpMethod">
                 <constant>GET</constant>
             </setHeader>
+<!--            <setHeader name="Content-Type">-->
+<!--                <constant>application/xml</constant>-->
+<!--            </setHeader>-->
             <recipientList>
                 <simple>http4://{{service.host}}/getAllUsers</simple>
             </recipientList>
